@@ -13,14 +13,15 @@ mode="local"  #LOCAL or USB_Storage
 mountr=/media/backup_root
 mountb=/media/backup_boot
 
+#usage: interactive_env "ENV1" "test1"
 interactive_env(){
-    ENV1="test"
-    echo -n "please input ENV1 value(default is $ENV1):"
+    export $1=\"$2\"
+    echo -n "please input $(echo $1) value(default is $2):"
     read input_value
     if [ ! "$input_value" == "" ];then
-        ENV1=$input_value
+        export $1="${input_value}"
     fi
-    echo "ENV1 is $ENV1"
+    echo "$1 is $(eval echo \$$1)"
 }
 
 perpare(){
